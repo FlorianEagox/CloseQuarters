@@ -1,5 +1,7 @@
 class Player {
-  int x, y, velX, velY, maxVel;
+  int x, y,
+  velX, velY, maxVel,
+  weight = 0, maxWeight = 30;
   Player(int x, int y) {
      this.x = x;
      this.y = y;
