@@ -1,7 +1,8 @@
 class Player extends Sprite {
   int
-    velX, velY, maxVel,
+    velX, velY, vel = 6,
     weight = 0, maxWeight = 30;
+
   Player(int x, int y) {
     super(x, y, "player.png");
   }
@@ -9,10 +10,7 @@ class Player extends Sprite {
     super.draw();
   }
   void tick() {
-    if(velX >= maxVel)
-      x = velX;
-    if(velY >= maxVel)
-      y = velY;
+    
         
     x += velX;
     y += velY;
@@ -20,32 +18,49 @@ class Player extends Sprite {
     //Keep Player in range
     if(x <= 0)
       x = 0;
-    if(x >= width)
-      x = width;
+    if(x >= width - sizeX)
+      x = width - sizeX;
     if(y <= 0)
       y = 0;
-    if(y >= height)
-      y = height;
+    if(y >= height - sizeY)
+      y = height - sizeY;
     
-    for(Trinket t : trinkets) {
+    Trinket toRemove = null;
+    for(Trinket t : trinkets)
       if(intersects(this, t))
-        print("intersex!");
-    }
+        toRemove = t;
+    if(toRemove != null)
+      trinkets.remove(toRemove);
   }
   
-  void input() {
+  void keyPressed() {
     switch(key) {
       case 'w':
-        velY--;
+        velY = -vel;
         break;
       case 's':
-        velY++;
+        velY = vel;
         break;
       case 'a':
-        velX--;
+        velX = -vel;
         break;
       case 'd':
-        velX++;
+        velX = vel;
+        break;
+    }
+  
+  
+  
+  }
+  void keyReleased() {
+    switch(key) {
+      case 'w':
+      case 's':
+        velY = 0;
+        break;
+      case 'a':
+      case 'd':
+        velX = 0;
         break;
     }
   }

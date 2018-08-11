@@ -4,7 +4,7 @@ ArrayList<Trinket> trinkets = new ArrayList<Trinket>();
 void setup() {
   size(640, 480);
   player = new Player(10, 10);
-  trinkets.add(new Trinket(100, 100));
+  trinkets.add(new Trinket(300, 300));
 }
 void draw() {
   background(#000000);
@@ -14,7 +14,10 @@ void draw() {
     t.draw();
 }
 void keyPressed() {
-  player.input();
+  player.keyPressed();
+}
+void keyReleased() {
+  player.keyReleased();
 }
 void tick() {
 
