@@ -17,11 +17,13 @@ void keyPressed() {
   player.input();
 }
 void tick() {
-  player.tick();
-  for(Trinket t : trinkets)
+
+player.tick();
+for(Trinket t : trinkets)
     t.tick();
 }
 
-boolean intersection() {
-  return false;
+
+boolean intersects(Sprite a, Sprite b) { // if a or b's x and y choords call within eachother's bounds.
+  return (a.x < b.x + b.sizeX && a.x + a.sizeX > b.x && a.y < b.y + b.sizeY && a.y + a.sizeY > b.y);
 }

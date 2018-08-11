@@ -17,6 +17,7 @@ class Player extends Sprite {
     x += velX;
     y += velY;
 
+    //Keep Player in range
     if(x <= 0)
       x = 0;
     if(x >= width)
@@ -25,6 +26,11 @@ class Player extends Sprite {
       y = 0;
     if(y >= height)
       y = height;
+    
+    for(Trinket t : trinkets) {
+      if(intersects(this, t))
+        print("intersex!");
+    }
   }
   
   void input() {

@@ -1,23 +1,23 @@
 abstract class Sprite {
     int x, y,
-    height, width;
+    sizeX, sizeY;
     PImage img;
     public Sprite(int x, int y, String path) {
       this.x = x;
       this.y = y;
       img = loadImage("assets/" + path);
-      this.width = img.width;
-      this.height = img.height;
+      sizeX = img.width;
+      sizeY = img.height;
     }
-    public Sprite(int x, int y, String path, int width, int height) {
+    public Sprite(int x, int y, String path, int sizeX, int sizeY) {
       this(x, y, path);
-      this.width = width;
-      this.height = height;
+      this.sizeX = sizeX;
+      this.sizeY = sizeY;
     }
     void tick() {
       
     }
     void draw() {
-        image(img, x, y, height, width);
+        image(img, x, y, sizeX, sizeY);
     }
 }
