@@ -15,6 +15,15 @@ class Player {
         
     x += velX;
     y += velY;
+
+    if(x <= 0)
+      x = 0;
+    if(x >= width)
+      x = width;
+    if(y <= 0)
+      y = 0;
+    if(y >= height)
+      y = height;
   }
   
   void input() {
