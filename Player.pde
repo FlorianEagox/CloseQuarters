@@ -1,7 +1,7 @@
 class Player extends Sprite {
   int
-    velX, velY, vel = 6,
-    weight = 0, maxWeight = 30;
+    velX, velY, vel = 5,
+    currentTrinkets = 0, maxTrinkets = 6;
 
   Player(int x, int y) {
     super(x, y, "player.png");
@@ -24,13 +24,19 @@ class Player extends Sprite {
       y = 0;
     if(y >= height - sizeY)
       y = height - sizeY;
-    
-    Trinket toRemove = null;
-    for(Trinket t : trinkets)
-      if(intersects(this, t))
-        toRemove = t;
-    if(toRemove != null)
-      trinkets.remove(toRemove);
+
+    if(currentTrinkets < maxTrinkets) { // if trinkets are full
+      Trinket toRemove = null; //a value to remove after iteration
+      for(Trinket t : trinkets)
+        if(intersects(this, t)) {
+          toRemove = t;
+          currentTrinkets++;
+        }
+      if(toRemove != null)
+        trinkets.remove(toRemove); //remove the trinket the player colided with
+    }
+    //DOESN'T WORK. # of trinkets should be inverse proportional to velocity
+    //vel -= currentTrinkets + 1;
   }
   
   void keyPressed() {

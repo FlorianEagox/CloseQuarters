@@ -2,9 +2,15 @@ Player player;
 ArrayList<Trinket> trinkets = new ArrayList<Trinket>();
 
 void setup() {
-  size(640, 480);
-  player = new Player(10, 10);
+  size(1280, 720);
+  player = new Player(100, 100);
   trinkets.add(new Trinket(300, 300));
+  trinkets.add(new Trinket(251, 237));
+  trinkets.add(new Trinket(142, 425));
+  trinkets.add(new Trinket(662, 127));
+  trinkets.add(new Trinket(1000, 600));
+  trinkets.add(new Trinket(100, 644));
+  trinkets.add(new Trinket(1100, 327));
 }
 void draw() {
   background(#000000);
