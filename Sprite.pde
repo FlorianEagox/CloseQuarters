@@ -4,7 +4,7 @@ abstract class Sprite {
     public Sprite(int x, int y, String path) {
       this.x = x;
       this.y = y;
-      img = loadImage(path);
+      img = loadImage("assets/" + path);
     }
     void tick() {
       
