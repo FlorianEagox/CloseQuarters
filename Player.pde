@@ -1,17 +1,15 @@
 class Player extends Sprite {
-  int
-    velX, velY, vel = 5,
-    currentTrinkets = 0, maxTrinkets = 6;
+  int velX, velY, vel = 5, maxTrinkets = 6;
+
+  private ArrayList<TrinketTypes> currentTrinkets = new ArrayList<TrinketTypes>();
 
   Player(int x, int y) {
-    super(x, y, "player.png");
+    super(x, y, "player.png", 50, 50);
+    this.zIndex = 1;
   }
-  void draw() {
-    super.draw();
-  }
-  void tick() {
-    
-        
+
+  @Override
+  public void tick() {
     x += velX;
     y += velY;
 
@@ -24,19 +22,14 @@ class Player extends Sprite {
       y = 0;
     if(y >= height - sizeY)
       y = height - sizeY;
-
-    if(currentTrinkets < maxTrinkets) { // if trinkets are full
-      Trinket toRemove = null; //a value to remove after iteration
-      for(Trinket t : trinkets)
-        if(intersects(this, t)) {
-          toRemove = t;
-          currentTrinkets++;
-        }
-      if(toRemove != null)
-        trinkets.remove(toRemove); //remove the trinket the player colided with
-    }
     //DOESN'T WORK. # of trinkets should be inverse proportional to velocity
     //vel -= currentTrinkets + 1;
+  }
+
+  boolean pickup(TrinketTypes trinket) {
+    if (currentTrinkets.size() >= maxTrinkets) return false;
+    currentTrinkets.add(trinket);
+    return true;
   }
   
   void keyPressed() {
