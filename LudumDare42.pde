@@ -21,3 +21,7 @@ void tick() {
   for(Trinket t : trinkets)
     t.tick();
 }
+
+boolean intersection() {
+  return false;
+}

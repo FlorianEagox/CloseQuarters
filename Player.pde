@@ -1,13 +1,12 @@
-class Player {
-  int x, y,
-  velX, velY, maxVel,
-  weight = 0, maxWeight = 30;
+class Player extends Sprite {
+  int
+    velX, velY, maxVel,
+    weight = 0, maxWeight = 30;
   Player(int x, int y) {
-     this.x = x;
-     this.y = y;
+    super(x, y, "player.png");
   }
   void draw() {
-    rect(x, y, 10, 10);
+    super.draw();
   }
   void tick() {
     if(velX >= maxVel)
