@@ -17,7 +17,7 @@ void setup() {
   player = new Player(100, 100);
   drawables.add(player);
   currentRoom.roomDrawables.add(new Door(0, (720/2)-100, newRoom));
-  drawables.add(new LightMask());
+  // drawables.add(new LightMask()); <- REMOVED FOR NOW
   drawablesUpdated();
 }
 void draw() {
