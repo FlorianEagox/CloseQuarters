@@ -36,10 +36,12 @@ public class Room {
       if (t instanceof Sprite) {
         Sprite sprite = (Sprite) t;
         for(Drawable j : drawables) {
-          Sprite sprite2 = (Sprite) j;
-           if (intersects(sprite, sprite2)) {
-            if (sprite.onCollision(sprite2)) {
-              drawablesChanged = true;
+          if(j instanceof Sprite) {
+            Sprite sprite2 = (Sprite) j;
+            if (intersects(sprite, sprite2)) {
+              if (sprite.onCollision(sprite2)) {
+                drawablesChanged = true;
+              }
             }
           }
         }
