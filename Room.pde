@@ -4,6 +4,7 @@ public class Room {
   int waterRaidus = 0;
   WaterDirection direction = WaterDirection.WEST;
   boolean waterActive = true;
+  PImage bkg;
   public Room(String name /* Drawable[] myDrawables */) {
     roomDrawables = new ArrayList<Drawable>();
     // for (Drawable drawable : myDrawables) {
@@ -19,6 +20,7 @@ public class Room {
       if(((color)objectLayer.get(x, y)) == #ffffff)
         roomDrawables.add(new Trinket(x, y, TrinketTypes.COINS));
     }
+    bkg = loadImage("assets/deck.png");
   }
 
   public void drawablesUpdated() {
@@ -28,9 +30,14 @@ public class Room {
   }
 
   void draw() {
+    image(bkg, 0, 0);
+    if(waterActive) {
+      fill(#40a4df);
+      ellipse(direction.x, direction.y, waterRaidus, waterRaidus);
+    }
+    
     for(Drawable d : roomDrawables)
       d.draw();
-
   }
   void tick() {
     boolean drawablesChanged = false;
@@ -52,12 +59,8 @@ public class Room {
     }
     if(drawablesChanged) roomDrawablesUpdated();
   
-    //WATER RADIUS
-    if(waterActive) {
-      fill(#40a4df);
-      ellipse(direction.x, direction.y, waterRaidus, waterRaidus);
+    if(waterActive)
       waterRaidus += 1;
-    }
   }
 
   public void roomDrawablesUpdated() {
@@ -66,5 +69,6 @@ public class Room {
         roomDrawables.remove(i);
       }
     }
+    
   }
 }

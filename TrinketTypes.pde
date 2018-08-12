@@ -1,5 +1,5 @@
 public enum TrinketTypes {
-  COINS("coins", 0.50f);
+  COINS("coins", 0.50f),
   LOCKET("locket", 1.5f);
 
   public String fileName;

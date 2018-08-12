@@ -21,11 +21,12 @@ void setup() {
   drawablesUpdated();
 }
 void draw() {
-  background(#000000);
   tick();
+  background(#000000);
   currentRoom.draw();
   for(Drawable t : drawables)
     t.draw();
+  
 }
 
 void keyPressed() {
@@ -75,4 +76,11 @@ void drawablesUpdated() {
 
 boolean intersects(Sprite a, Sprite b) { // if a or b's x and y choords call within eachother's bounds.
   return (a.x < b.x + b.sizeX && a.x + a.sizeX > b.x && a.y < b.y + b.sizeY && a.y + a.sizeY > b.y);
+
+}
+boolean intersectsCircle(Sprite a, int x, int y, int radius) {
+  return(x + radius >= a.x &&
+    y + radius >= a.y &&
+    x - radius <= a.x + a.sizeX &&
+    y - radius <= a.y + a.sizeY);
 }
