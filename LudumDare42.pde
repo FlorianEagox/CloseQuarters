@@ -2,61 +2,62 @@ import java.util.*;
 Room currentRoom;
 Room newRoom;
 Player player;
-/* 
-*  The trinkets and cracks stuff needs to be moved to the Room class. There will
-*  be many subclasses of Room. These will be the different rooms in the ship.
-*  Instances of which will be stored in this main file. I have yet to figure out
-*  how we are going to deal with room switching, but I think there will be a
-*  door class that will switch rooms on collision with the player. 
-*/
+PlayState playstate;
+Menu menu;
+Game game;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+
 void setup() {
+  playstate = PlayState.MENU;
   size(1280, 720);
-  currentRoom = new Room("room1");
-  newRoom = new Room("room1");
-  player = new Player(100, 100);
-  drawables.add(player);
-  currentRoom.roomDrawables.add(new Door(0, (720/2)-100, newRoom));
-  // drawables.add(new LightMask()); <- REMOVED FOR NOW
-  drawablesUpdated();
-}
-void draw() {
-  tick();
-  background(#000000);
-  currentRoom.draw();
-  for(Drawable t : drawables)
-    t.draw();
-  
+  menu = new Menu();
 }
 
-void keyPressed() {
-  player.keyPressed();
-}
-void keyReleased() {
-  player.keyReleased();
+void draw() {
+  background(#000000);
+  tick();
+  switch(playstate) {
+    case MENU:
+      menu.draw();
+      break;
+    case PLAYING:
+      game.draw();
+      break;
+  }
 }
 
 void tick() {
-  boolean drawablesChanged = false;
-  for(Drawable t : drawables) {
-    if (t instanceof Sprite) {
-      Sprite sprite = (Sprite) t;
-      for(Drawable j : drawables) {
-        if(j instanceof Sprite) {
-          Sprite sprite2 = (Sprite) j;
-          if (intersects(sprite, sprite2)) {
-            if (sprite.onCollision(sprite2)) {
-              drawablesChanged = true;
-            }
-          }
-        }
-      }
-      sprite.tick();
-    }
+  switch(playstate) {
+    case MENU:
+      menu.tick();
+      break;
+    case PLAYING:
+      game.tick();
+      break;
   }
-  currentRoom.tick();
-  if(drawablesChanged) drawablesUpdated();
 }
+
+//EVENTS
+
+void keyPressed() {
+  if(playstate == PlayState.PLAYING)
+    game.keyPressed();
+}
+void keyReleased() {
+  if(playstate == PlayState.PLAYING)
+    game.keyReleased();
+}
+
+void mouseClicked() {
+  if(playstate == PlayState.MENU)
+    menu.mouseClicked();
+}
+void mousePressed() {
+  if(playstate == PlayState.MENU)
+    menu.mousePressed();
+}
+
+//UTILS
 
 void drawablesUpdated() {
   currentRoom.roomDrawablesUpdated();
