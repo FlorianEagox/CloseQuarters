@@ -20,7 +20,7 @@ public class LightMask extends Drawable {
             float dist = sqrt(pow(px - x, 2) + pow(py - y, 2));
             float angle = (float) Math.toDegrees(atan2(py - y, px - x)) - (offsetAngle - (widthAngle / 3));
             img.pixels[i] = color(0, 0, 0, 255);
-            if (angle <= widtmousehAngle && angle >= 0 && dist <= 50) {
+            if (angle <= widthAngle && angle >= 0 && dist <= 50) {
                 float angleN = abs((angle / (widthAngle / 2f)) - 1);
                 float distN = dist / 50f;
                 img.pixels[i] = color(0, 0, 0, min(angleN*angleN*255, (distN*(2-distN))*255));
