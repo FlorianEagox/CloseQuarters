@@ -1,19 +1,28 @@
 public class Room {
   ArrayList<Drawable> roomDrawables;
+  PImage objectLayer;
 
-  public Room(/* Drawable[] myDrawables */) {
+  public Room(String name /* Drawable[] myDrawables */) {
     roomDrawables = new ArrayList<Drawable>();
     // for (Drawable drawable : myDrawables) {
     //   roomDrawables.add(drawable);
     // }
+    objectLayer = loadImage("assets/rooms/" + name + " objectLayer.png");
+    objectLayer.loadPixels();
+    int px = width/2;
+    int py = height/2;
+    for (int i = 0; i < objectLayer.pixels.length; i++) {
+      int x = i % 1280;
+      int y = floor(i / 1280);
+      if(((color)objectLayer.get(x, y)) == #ffffff)
+        roomDrawables.add(new Trinket(x, y, TrinketTypes.COINS));
+    }
   }
 
   public void drawablesUpdated() {
-    for (int i = roomDrawables.size() - 1; i >= 0; i--) {
-      if (roomDrawables.get(i).toBeRemoved) {
+    for (int i = roomDrawables.size() - 1; i >= 0; i--)
+      if (roomDrawables.get(i).toBeRemoved)
         roomDrawables.remove(i);
-      }
-    }
   }
 
   void draw() {
@@ -28,7 +37,7 @@ public class Room {
         Sprite sprite = (Sprite) t;
         for(Drawable j : drawables) {
           Sprite sprite2 = (Sprite) j;
-          if (intersects(sprite, sprite2)) {
+           if (intersects(sprite, sprite2)) {
             if (sprite.onCollision(sprite2)) {
               drawablesChanged = true;
             }

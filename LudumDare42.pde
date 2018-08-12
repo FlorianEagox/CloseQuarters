@@ -12,15 +12,19 @@ Player player;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 void setup() {
   size(1280, 720);
-  currentRoom = new Room();
-  newRoom = new Room();
+  currentRoom = new Room("room1");
+  newRoom = new Room("room1");
   player = new Player(100, 100);
   drawables.add(player);
-  currentRoom.roomDrawables.add(new Trinket(300, 300, TrinketTypes.COINS));
-  currentRoom.roomDrawables.add(new Trinket(251, 237, TrinketTypes.COINS));
-  currentRoom.roomDrawables.add(new Door(0, (720/2)-100, newRoom));
-  newRoom.roomDrawables.add(new Trinket(142, 425, TrinketTypes.COINS));
-  newRoom.roomDrawables.add(new Trinket(662, 127, TrinketTypes.COINS));
+  // currentRoom.roomDrawables.add(new Trinket(300, 300, TrinketTypes.COINS));
+  // currentRoom.roomDrawables.add(new Trinket(251, 237, TrinketTypes.COINS));
+    currentRoom.roomDrawables.add(new Door(0, (720/2)-100, newRoom));
+  // currentRoom.roomDrawables.add(new Trinket(621, 123, TrinketTypes.COINS));
+  // newRoom.roomDrawables.add(new Trinket(512, 425, TrinketTypes.COINS));
+  // newRoom.roomDrawables.add(new Trinket(662, 127, TrinketTypes.COINS));
+  // newRoom.roomDrawables.add(new Trinket(77, 167, TrinketTypes.COINS));
+  // newRoom.roomDrawables.add(new Trinket(552, 621, TrinketTypes.COINS));
+  
   drawablesUpdated();
 }
 void draw() {
