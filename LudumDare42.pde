@@ -1,5 +1,6 @@
 import java.util.*;
-
+Room currentRoom;
+Room newRoom;
 Player player;
 /* 
 *  The trinkets and cracks stuff needs to be moved to the Room class. There will
@@ -7,32 +8,29 @@ Player player;
 *  Instances of which will be stored in this main file. I have yet to figure out
 *  how we are going to deal with room switching, but I think there will be a
 *  door class that will switch rooms on collision with the player. 
-*/ 
+*/
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-
 void setup() {
   size(1280, 720);
+  currentRoom = new Room();
+  newRoom = new Room();
   player = new Player(100, 100);
   drawables.add(player);
-  drawables.add(new Trinket(300, 300, TrinketTypes.COINS));
-  drawables.add(new Trinket(251, 237, TrinketTypes.COINS));
-  drawables.add(new Trinket(142, 425, TrinketTypes.COINS));
-  drawables.add(new Trinket(662, 127, TrinketTypes.COINS));
-  drawables.add(new Trinket(1000, 600, TrinketTypes.COINS));
-  drawables.add(new Trinket(100, 644, TrinketTypes.COINS));
-  drawables.add(new Trinket(1100, 327, TrinketTypes.COINS));
-  drawables.add(new Crack(300, 600));
-  drawables.add(new Crack(600, 200));
+  currentRoom.roomDrawables.add(new Trinket(300, 300, TrinketTypes.COINS));
+  currentRoom.roomDrawables.add(new Trinket(251, 237, TrinketTypes.COINS));
+  currentRoom.roomDrawables.add(new Door(300, 400, newRoom));
+  newRoom.roomDrawables.add(new Trinket(142, 425, TrinketTypes.COINS));
+  newRoom.roomDrawables.add(new Trinket(662, 127, TrinketTypes.COINS));
   drawablesUpdated();
-  
 }
 void draw() {
   background(#000000);
   tick();
-
+  currentRoom.draw();
   for(Drawable t : drawables)
     t.draw();
 }
+
 void keyPressed() {
   player.keyPressed();
 }
@@ -66,6 +64,7 @@ void drawablesUpdated() {
       drawables.remove(i);
     }
   }
+  
   Collections.sort(drawables, new Comparator<Drawable>() {
     @Override
     public int compare(Drawable lhs, Drawable rhs) {

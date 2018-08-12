@@ -47,9 +47,6 @@ class Player extends Sprite {
         velX = vel;
         break;
     }
-  
-  
-  
   }
   void keyReleased() {
     switch(key) {
