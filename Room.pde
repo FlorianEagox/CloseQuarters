@@ -2,6 +2,7 @@ public class Room {
   ArrayList<Drawable> roomDrawables;
   PImage objectLayer;
   int waterRaidus = 0;
+  WaterDirection direction = WaterDirection.WEST;
   boolean waterActive = true;
   public Room(String name /* Drawable[] myDrawables */) {
     roomDrawables = new ArrayList<Drawable>();
@@ -54,7 +55,7 @@ public class Room {
     //WATER RADIUS
     if(waterActive) {
       fill(#40a4df);
-      ellipse(width / 2, height, waterRaidus, waterRaidus);
+      ellipse(direction.x, direction.y, waterRaidus, waterRaidus);
       waterRaidus += 1;
     }
   }
