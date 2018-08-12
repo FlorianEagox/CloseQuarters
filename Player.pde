@@ -4,7 +4,7 @@ class Player extends Sprite {
   private ArrayList<TrinketTypes> currentTrinkets = new ArrayList<TrinketTypes>();
 
   Player(int x, int y) {
-    super(x, y, "player.png", 50, 50);
+    super(x, y, "player/idle.png", 75, 75);
     this.zIndex = 1;
   }
 
