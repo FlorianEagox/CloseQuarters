@@ -20,7 +20,7 @@ public class Room {
       if(((color)objectLayer.get(x, y)) == #ffffff)
         roomDrawables.add(new Trinket(x, y, TrinketTypes.COINS));
     }
-    bkg = loadImage("assets/deck.png");
+    bkg = loadImage("assets/floor.png");
   }
 
   public void drawablesUpdated() {

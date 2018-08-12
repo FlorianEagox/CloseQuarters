@@ -6,6 +6,7 @@ PlayState playstate;
 Menu menu;
 Game game;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+int numRooms = 10;
 
 void setup() {
   playstate = PlayState.MENU;
