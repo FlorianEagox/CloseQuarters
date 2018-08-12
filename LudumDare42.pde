@@ -18,7 +18,7 @@ void setup() {
   drawables.add(player);
   currentRoom.roomDrawables.add(new Trinket(300, 300, TrinketTypes.COINS));
   currentRoom.roomDrawables.add(new Trinket(251, 237, TrinketTypes.COINS));
-  currentRoom.roomDrawables.add(new Door(300, 400, newRoom));
+  currentRoom.roomDrawables.add(new Door(0, (720/2)-100, newRoom));
   newRoom.roomDrawables.add(new Trinket(142, 425, TrinketTypes.COINS));
   newRoom.roomDrawables.add(new Trinket(662, 127, TrinketTypes.COINS));
   drawablesUpdated();
@@ -43,22 +43,23 @@ void tick() {
   for(Drawable t : drawables) {
     if (t instanceof Sprite) {
       Sprite sprite = (Sprite) t;
-      sprite.tick();
-    }
-    if (t instanceof Trinket) {
-      Trinket trinket = (Trinket) t;
-      if (intersects(trinket, player)) {
-        if (player.pickup(trinket.type)) {
-          trinket.toBeRemoved = true;
-          drawablesChanged = true;
+      for(Drawable j : drawables) {
+        Sprite sprite2 = (Sprite) j;
+        if (intersects(sprite, sprite2)) {
+          if (sprite.onCollision(sprite2)) {
+            drawablesChanged = true;
+          }
         }
       }
+      sprite.tick();
     }
   }
+  currentRoom.tick();
   if(drawablesChanged) drawablesUpdated();
 }
 
 void drawablesUpdated() {
+  currentRoom.roomDrawablesUpdated();
   for (int i = drawables.size() - 1; i >= 0; i--) {
     if (drawables.get(i).toBeRemoved) {
       drawables.remove(i);
