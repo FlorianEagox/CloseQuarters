@@ -10,17 +10,20 @@ public class Room {
     // for (Drawable drawable : myDrawables) {
     //   roomDrawables.add(drawable);
     // }
-    objectLayer = loadImage("assets/rooms/" + name + " objectLayer.png");
-    objectLayer.loadPixels();
+    
     int px = width/2;
     int py = height/2;
-    for (int i = 0; i < objectLayer.pixels.length; i++) {
-      int x = i % 1280;
-      int y = floor(i / 1280);
-      if(((color)objectLayer.get(x, y)) == #ffffff)
+    if(name != "deck") {
+      objectLayer = loadImage("assets/rooms/" + name + " objectLayer.png");
+      objectLayer.loadPixels();
+      for(int i : findPixels(objectLayer, #ffffff)) {
+        int x = i % 1280;
+        int y = floor(i / 1280);
         roomDrawables.add(new Trinket(x, y, TrinketTypes.COINS));
+      }
     }
-    bkg = loadImage("assets/floor.png");
+    bkg = loadImage("assets/" + (name == "deck" ? "deck" : "floor") + ".png");
+    
   }
 
   public void drawablesUpdated() {

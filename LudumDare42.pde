@@ -6,7 +6,6 @@ PlayState playstate;
 Menu menu;
 Game game;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-int numRooms = 10;
 
 void setup() {
   playstate = PlayState.MENU;
@@ -85,4 +84,18 @@ boolean intersectsCircle(Sprite a, int x, int y, int radius) {
     y + radius >= a.y &&
     x - radius <= a.x + a.sizeX &&
     y - radius <= a.y + a.sizeY);
+}
+int[] findPixels(PImage img, color c) {
+  ArrayList<Integer> pixelsFound = new ArrayList<Integer>();
+  img.loadPixels();
+  for (int i = 0; i < img.pixels.length; i++) {
+      if(img.pixels[i] == c) {
+        pixelsFound.add(i);
+      }
+  }
+  int[] pixelsFoundArray = new int[pixelsFound.size()];
+  for (int i = 0; i < pixelsFound.size(); i++) {
+    pixelsFoundArray[i] = (int) pixelsFound.get(i);
+  } 
+  return pixelsFoundArray;
 }
