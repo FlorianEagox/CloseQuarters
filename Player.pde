@@ -1,5 +1,5 @@
 class Player extends Sprite {
-  int velX, velY, vel = 5, maxTrinkets = 3000;
+  int velX, velY, vel = 5, maxTrinkets = 5;
 
   private ArrayList<TrinketTypes> currentTrinkets = new ArrayList<TrinketTypes>();
 
