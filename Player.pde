@@ -87,10 +87,14 @@ class Player extends Sprite {
   void keyReleased() {
     switch(key) {
       case 'w':
+        velY = 0;
+        break;
       case 's':
         velY = 0;
         break;
       case 'a':
+        velX = 0;
+        break;
       case 'd':
         velX = 0;
         break;
