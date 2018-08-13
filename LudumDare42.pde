@@ -96,6 +96,6 @@ int[] findPixels(PImage img, color c) {
   int[] pixelsFoundArray = new int[pixelsFound.size()];
   for (int i = 0; i < pixelsFound.size(); i++) {
     pixelsFoundArray[i] = (int) pixelsFound.get(i);
-  } 
+  }
   return pixelsFoundArray;
 }

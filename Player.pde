@@ -9,6 +9,8 @@ class Player extends Sprite {
   int previousTime = 0;
   int currentFrame = 0;
   
+  int health = 10;
+
   Player(int x, int y) {
     super(x, y, "player/idle.png", 75, 75);
     this.zIndex = 1;
@@ -56,6 +58,14 @@ class Player extends Sprite {
       y = height - sizeY;
     //DOESN'T WORK. # of trinkets should be inverse proportional to velocity
     //vel -= currentTrinkets + 1;
+    if(currentRoom.waterActive) {
+      int centerX = currentRoom.direction.x;
+      int centerY = currentRoom.direction.y;
+      int radius = currentRoom.waterRadius;
+      float distance = sqrt(pow(x - centerX, 2) + pow(y - centerY, 2));
+      if(distance <= radius)
+        playstate = PlayState.MENU;
+    }
   }
 
   boolean pickup(TrinketTypes trinket) {
