@@ -1,10 +1,11 @@
 public class Game {
     Room[] room = new Room[9];
     Room roomDeck;
+    LightMask lightMask = new LightMask();
     int previousReleased = 0, delay = 10000;
     public Game() {
-          /////////////////////////////////////////////////////////////////////////////////
-         // ALL THE FUCKING DOORS OH MY GOD I WANT TO DIE LET ME SLEEP PLEASE HOLY SHIT //
+        /////////////////////////////////////////////////////////////////////////////////
+        // ALL THE FUCKING DOORS OH MY GOD I WANT TO DIE LET ME SLEEP PLEASE HOLY SHIT //
         /////////////////////////////////////////////////////////////////////////////////
         roomDeck = new Room("deck");
         for(int i = 0; i < room.length; i++) {
@@ -57,8 +58,6 @@ public class Game {
         
         player = new Player(100, 100);
         drawables.add(player);
-        
-        // drawables.add(new LightMask()); <- REMOVED FOR NOW
         drawablesUpdated();
     }
     public void draw() {   
@@ -69,9 +68,12 @@ public class Game {
             //translate(t.x, t.y); <-- DOESN'T WORK
             //rotate(radians(player.rotation));
         }
-        t.draw();
-        
-        }
+        t.draw();  
+      }
+      if (currentRoom != roomDeck) {
+          lightMask.draw();
+      }
+
     }
     public void tick() {
         boolean drawablesChanged = false;

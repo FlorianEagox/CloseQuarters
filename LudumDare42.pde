@@ -7,9 +7,13 @@ Game game;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 boolean actionPressed = false;
 
+void settings() {
+  size(1280, 720);
+}
+
 void setup() {
   playstate = PlayState.MENU;
-  size(1280, 720);
+  
   menu = new Menu();
 }
 
