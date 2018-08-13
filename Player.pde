@@ -70,8 +70,8 @@ class Player extends Sprite {
   }
 
   boolean pickup(TrinketTypes trinket) {
-    if (currentTrinkets.size() >= maxTrinkets && !actionPressed) return false;
-    currentTrinkets.add(trinket);
+    if (currentTrinkets.size() >= maxTrinkets || !actionPressed) return false;
+      currentTrinkets.add(trinket);
     return true;
   }
   

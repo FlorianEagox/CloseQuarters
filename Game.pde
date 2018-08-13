@@ -74,6 +74,7 @@ public class Game {
         }
     }
     public void tick() {
+        println(player.currentTrinkets.size());
         boolean drawablesChanged = false;
         for(Drawable t : drawables) {
             if (t instanceof Sprite) {
@@ -90,7 +91,6 @@ public class Game {
                 }
                 sprite.tick();
             }
-						
             currentRoom.tick();
             if(drawablesChanged) drawablesUpdated();
         }

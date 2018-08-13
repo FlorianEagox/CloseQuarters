@@ -38,7 +38,7 @@ public class Room {
     image(bkg, 0, 0);
       fill(#40a4df);
       ellipse(direction.x, direction.y, waterRadius, waterRadius);
-
+      
     
     for(Drawable d : roomDrawables)
       d.draw();

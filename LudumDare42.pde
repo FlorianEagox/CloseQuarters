@@ -17,6 +17,7 @@ void setup() {
 }
 
 void draw() {
+  
   background(#000000);
   tick();
   switch(playstate) {
