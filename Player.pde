@@ -1,5 +1,5 @@
 class Player extends Sprite {
-  int velX, velY, vel = 5, maxTrinkets = 5;
+  int velX, velY, vel = 5, maxTrinkets = 10;
   AnimationState animation = AnimationState.IDLE;
   private ArrayList<TrinketTypes> currentTrinkets = new ArrayList<TrinketTypes>();
   float rotation = 0f;
@@ -10,13 +10,14 @@ class Player extends Sprite {
   int currentFrame = 0;
   
   int health = 10;
-
+  Drawable idleImg;
   Player(int x, int y) {
     super(x, y, "player/idle.png", 75, 75);
     this.zIndex = 1;
     for(int i = 1; i <= 5; i++) {
       animations.add(new Image("assets/player/walk " + i + ".png"));
     }
+    idleImg = this.drawable;
   }
 
   @Override
@@ -46,6 +47,8 @@ class Player extends Sprite {
         currentFrame++;
         previousTime = millis();
       }
+    } else {
+      drawable = idleImg;
     }
     //Keep Player in range
     if(x <= 0)

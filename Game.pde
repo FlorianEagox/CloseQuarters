@@ -77,7 +77,7 @@ public class Game {
         println(player.currentTrinkets.size());
         boolean drawablesChanged = false;
         for(Drawable t : drawables) {
-            if (t instanceof Sprite) {
+            if (t instanceof Sprite) { 
                 Sprite sprite = (Sprite) t;
                 for(Drawable j : drawables) {
                     if(j instanceof Sprite) {
