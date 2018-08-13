@@ -3,8 +3,8 @@ public class Room {
   PImage objectLayer;
   int waterRadius = 0;
   int maxWater = 2750;
-  WaterDirection direction = WaterDirection.WEST;
-  boolean waterActive = true;
+  WaterDirection direction = WaterDirection.SOUTH;
+  boolean waterActive = false;
   PImage bkg;
   public Room(String name) {
     roomDrawables = new ArrayList<Drawable>();
@@ -30,10 +30,9 @@ public class Room {
 
   void draw() {
     image(bkg, 0, 0);
-    if(waterActive) {
       fill(#40a4df);
       ellipse(direction.x, direction.y, waterRadius, waterRadius);
-    }
+    
     
     for(Drawable d : roomDrawables)
       d.draw();
@@ -63,6 +62,30 @@ public class Room {
   public void waterTick() {
       if(waterActive)
         waterRadius += 1;
+      if(waterRadius >= maxWater / 2) {
+        waterActive = false;
+        for(Drawable d : roomDrawables) {
+          if(d instanceof Door) {
+            Door door = (Door) d;
+            Room room = door.nextRoom;
+            room.waterActive = true;
+            switch(door.type) {
+              case NORTH:
+                room.direction = WaterDirection.SOUTH;
+                break;
+              case EAST:
+                room.direction = WaterDirection.WEST;
+                break;
+              case SOUTH:
+                room.direction = WaterDirection.NORTH;
+                break;
+              case WEST:
+                room.direction = WaterDirection.EAST;
+                break;
+            }
+          }
+        }
+      }
       //println(waterRadius);
   }
 

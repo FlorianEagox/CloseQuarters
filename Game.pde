@@ -8,7 +8,7 @@ public class Game {
         /////////////////////////////////////////////////////////////////////////////////
         roomDeck = new Room("deck");
         for(int i = 0; i < room.length; i++) {
-            room[i] = new Room("room1");
+            room[i] = new Room("room" + (i + 1));
         }
         
           roomDeck.roomDrawables.add(new Door(room[2-1], DoorType.STAIRS));
@@ -40,10 +40,12 @@ public class Game {
           room[7-1].roomDrawables.add(new Door(room[4-1], DoorType.NORTH));
           room[7-1].roomDrawables.add(new Door(room[8-1], DoorType.EAST));
         
-          room[8-1].roomDrawables.add(new Door(room[5-1], DoorType.NORTH));
+          room[8-1].roomDrawables.add(new Door(room[5-1], DoorType.NORTH)); // <- WATER STARTING ROOM
           room[8-1].roomDrawables.add(new Door(room[7-1], DoorType.WEST));
           room[8-1].roomDrawables.add(new Door(room[9-1], DoorType.EAST));
-        
+          room[8-1].waterActive = true;
+
+
           room[9-1].roomDrawables.add(new Door(room[8-1], DoorType.WEST));
           room[9-1].roomDrawables.add(new Door(room[6-1], DoorType.NORTH));
         

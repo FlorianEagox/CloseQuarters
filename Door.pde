@@ -19,7 +19,6 @@ class Door extends Sprite {
             x = type.x;
             y = type.y;
         }
-        println(nextRoom);
     }
 
     @Override
