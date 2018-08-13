@@ -12,6 +12,7 @@ boolean actionPressed = false;
 void setup() {
   playstate = PlayState.MENU;
   size(1280, 720);
+  gameOver = new GameOver();
   menu = new Menu();
 }
 

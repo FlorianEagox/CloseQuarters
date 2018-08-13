@@ -1,6 +1,6 @@
 public enum TrinketTypes {
   COINS("coins", 0.50f),
-  locket("locket", 1.5f);
+  LOCKET("locket", 1.5f);
 
   public String fileName;
   public float worth;

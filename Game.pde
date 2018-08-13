@@ -90,7 +90,7 @@ public class Game {
                 }
                 sprite.tick();
             }
-						println(player.currentTrinkets.size());
+						
             currentRoom.tick();
             if(drawablesChanged) drawablesUpdated();
         }
