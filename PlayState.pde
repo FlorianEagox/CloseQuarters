@@ -1,4 +1,5 @@
 public enum PlayState {
     MENU,
-    PLAYING
+    PLAYING,
+    GAME_OVER
 }

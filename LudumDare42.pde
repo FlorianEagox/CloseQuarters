@@ -4,6 +4,7 @@ Player player;
 PlayState playstate;
 Menu menu;
 Game game;
+GameOver gameOver;
 float score = 0f;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 boolean actionPressed = false;
@@ -24,6 +25,9 @@ void draw() {
     case PLAYING:
       game.draw();
       break;
+    case GAME_OVER:
+      gameOver.draw();
+      break;
   }
 }
 
@@ -34,6 +38,9 @@ void tick() {
       break;
     case PLAYING:
       game.tick();
+      break;
+    case GAME_OVER:
+      gameOver.tick();
       break;
   }
 }
@@ -52,6 +59,8 @@ void keyReleased() {
 void mouseClicked() {
   if(playstate == PlayState.MENU)
     menu.mouseClicked();
+  if(playstate == PlayState.GAME_OVER)
+    gameOver.mouseClicked();
 }
 void mousePressed() {
   if(playstate == PlayState.MENU)

@@ -64,7 +64,8 @@ class Player extends Sprite {
       int radius = currentRoom.waterRadius;
       float distance = sqrt(pow(x - centerX, 2) + pow(y - centerY, 2));
       if(distance <= radius)
-        playstate = PlayState.MENU;
+        gameOver = new GameOver();
+        playstate = PlayState.GAME_OVER;
     }
   }
 
