@@ -8,10 +8,11 @@ public class Menu {
     public Menu() {
         btnBkg = loadImage("assets/ui/btn.png");
         btnPlay = new Button((width - btnSizeX) / 2, (height - btnSizeY) / 2, btnSizeX, btnSizeY, "PLAY", btnBkg);
-        btnExit = new Button((width - btnSizeX) / 2, (height - btnSizeY) / 2 + btnSpaceY, btnSizeX, btnSizeY, "PLAY", btnBkg);
+        btnExit = new Button((width - btnSizeX) / 2, (height - btnSizeY) / 2 + btnSpaceY, btnSizeX, btnSizeY, "EXIT", btnBkg);
     }
     public void draw() {
         fill(#ff00ff);
+        text("Close Quarters", 0, 200);
         btnPlay.draw();
         btnExit.draw();
     }
