@@ -4,20 +4,20 @@ Player player;
 PlayState playstate;
 Menu menu;
 Game game;
+GameOver gameOver;
+float score = 0f;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 boolean actionPressed = false;
 
-void settings() {
-  size(1280, 720);
-}
-
 void setup() {
   playstate = PlayState.MENU;
-  
+  size(1280, 720);
+  gameOver = new GameOver();
   menu = new Menu();
 }
 
 void draw() {
+  
   background(#000000);
   tick();
   switch(playstate) {
@@ -26,6 +26,9 @@ void draw() {
       break;
     case PLAYING:
       game.draw();
+      break;
+    case GAME_OVER:
+      gameOver.draw();
       break;
   }
 }
@@ -37,6 +40,9 @@ void tick() {
       break;
     case PLAYING:
       game.tick();
+      break;
+    case GAME_OVER:
+      gameOver.tick();
       break;
   }
 }
@@ -55,6 +61,8 @@ void keyReleased() {
 void mouseClicked() {
   if(playstate == PlayState.MENU)
     menu.mouseClicked();
+  if(playstate == PlayState.GAME_OVER)
+    gameOver.mouseClicked();
 }
 void mousePressed() {
   if(playstate == PlayState.MENU)
@@ -100,6 +108,6 @@ int[] findPixels(PImage img, color c) {
   int[] pixelsFoundArray = new int[pixelsFound.size()];
   for (int i = 0; i < pixelsFound.size(); i++) {
     pixelsFoundArray[i] = (int) pixelsFound.get(i);
-  } 
+  }
   return pixelsFoundArray;
 }

@@ -18,6 +18,12 @@ public class Room {
         int y = floor(i / 1280);
         roomDrawables.add(new Trinket(x, y, TrinketTypes.COINS));
       }
+      for(int i : findPixels(objectLayer, #00ff00)) {
+        println("found it");
+        int x = i % 1280;
+        int y = floor(i / 1280);
+        roomDrawables.add(new Trinket(x, y, TrinketTypes.LOCKET));
+      }
     }
     bkg = loadImage("assets/" + (name == "deck" ? "deck" : "floor") + ".png");
   }

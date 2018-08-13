@@ -1,5 +1,5 @@
 class Player extends Sprite {
-  int velX, velY, vel = 5, maxTrinkets = 5;
+  int velX, velY, vel = 5, maxTrinkets = 10;
   AnimationState animation = AnimationState.IDLE;
   private ArrayList<TrinketTypes> currentTrinkets = new ArrayList<TrinketTypes>();
   float rotation = 0f;
@@ -9,12 +9,15 @@ class Player extends Sprite {
   int previousTime = 0;
   int currentFrame = 0;
   
+  int health = 10;
+  Drawable idleImg;
   Player(int x, int y) {
     super(x, y, "player/idle.png", 75, 75);
     this.zIndex = 1;
     for(int i = 1; i <= 5; i++) {
       animations.add(new Image("assets/player/walk " + i + ".png"));
     }
+    idleImg = this.drawable;
   }
 
   @Override
@@ -44,6 +47,8 @@ class Player extends Sprite {
         currentFrame++;
         previousTime = millis();
       }
+    } else {
+      drawable = idleImg;
     }
     //Keep Player in range
     if(x <= 0)
@@ -56,11 +61,20 @@ class Player extends Sprite {
       y = height - sizeY;
     //DOESN'T WORK. # of trinkets should be inverse proportional to velocity
     //vel -= currentTrinkets + 1;
+    if(currentRoom.waterActive) {
+      int centerX = currentRoom.direction.x;
+      int centerY = currentRoom.direction.y;
+      float dist = sqrt(pow(centerX - x, 2) + pow(centerY - y, 2));
+      println(dist);
+      if(dist <= currentRoom.waterRadius)
+        gameOver = new GameOver();
+        playstate = PlayState.GAME_OVER;
+    }
   }
 
   boolean pickup(TrinketTypes trinket) {
-    if (currentTrinkets.size() >= maxTrinkets && !actionPressed) return false;
-    currentTrinkets.add(trinket);
+    if (currentTrinkets.size() >= maxTrinkets || !actionPressed) return false;
+      currentTrinkets.add(trinket);
     return true;
   }
   
