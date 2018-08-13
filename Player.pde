@@ -64,11 +64,12 @@ class Player extends Sprite {
     if(currentRoom.waterActive) {
       int centerX = currentRoom.direction.x;
       int centerY = currentRoom.direction.y;
-      float dist = sqrt(pow(centerX - x, 2) + pow(centerY - y, 2));
-      println(dist);
-      if(dist <= currentRoom.waterRadius)
+      int radius = currentRoom.waterRadius/2;
+      float dist = sqrt(pow(x - centerX, 2) + pow(y - centerY, 2));
+      if(dist < radius) {
         gameOver = new GameOver();
         playstate = PlayState.GAME_OVER;
+      }
     }
   }
 

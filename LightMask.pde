@@ -6,7 +6,7 @@ public class LightMask extends Drawable {
   int px, py; 
   float offsetAngle = 0f;
   float widthAngle = 30f;
-  int auraRadius = 140;
+  int auraRadius = 200;
   int prevPX = 0;
   int prevPY = 0;
   int prevMX = 0;
