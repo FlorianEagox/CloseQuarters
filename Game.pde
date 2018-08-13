@@ -1,16 +1,67 @@
 public class Game {
-
+    Room[] room = new Room[9];
+    Room roomDeck;
+    int previousReleased = 0, delay = 10000;
     public Game() {
-        currentRoom = new Room("room1");
-        newRoom = new Room("deck");
+          /////////////////////////////////////////////////////////////////////////////////
+         // ALL THE FUCKING DOORS OH MY GOD I WANT TO DIE LET ME SLEEP PLEASE HOLY SHIT //
+        /////////////////////////////////////////////////////////////////////////////////
+        roomDeck = new Room("deck");
+        for(int i = 0; i < room.length; i++) {
+            room[i] = new Room("room1");
+        }
+        
+          roomDeck.roomDrawables.add(new Door(room[2-1], DoorType.STAIRS));
+        
+          room[1-1].roomDrawables.add(new Door(room[2-1], DoorType.EAST));
+          room[1-1].roomDrawables.add(new Door(room[4-1], DoorType.SOUTH));
+        
+          room[2-1].roomDrawables.add(new Door(roomDeck, DoorType.STAIRS));
+          room[2-1].roomDrawables.add(new Door(room[1-1], DoorType.WEST));
+          room[2-1].roomDrawables.add(new Door(room[3-1], DoorType.EAST));
+          room[2-1].roomDrawables.add(new Door(room[5-1], DoorType.SOUTH));
+        
+          room[3-1].roomDrawables.add(new Door(room[2-1], DoorType.WEST));
+          room[3-1].roomDrawables.add(new Door(room[6-1], DoorType.SOUTH));
+        
+          room[4-1].roomDrawables.add(new Door(room[1-1], DoorType.NORTH));
+          room[4-1].roomDrawables.add(new Door(room[5-1], DoorType.EAST));
+          room[4-1].roomDrawables.add(new Door(room[7-1], DoorType.SOUTH));
+        
+          room[5-1].roomDrawables.add(new Door(room[2-1], DoorType.NORTH));
+          room[5-1].roomDrawables.add(new Door(room[6-1], DoorType.EAST));
+          room[5-1].roomDrawables.add(new Door(room[8-1], DoorType.SOUTH));
+          room[5-1].roomDrawables.add(new Door(room[4-1], DoorType.WEST));
+        
+          room[6-1].roomDrawables.add(new Door(room[3-1], DoorType.NORTH));
+          room[6-1].roomDrawables.add(new Door(room[5-1], DoorType.WEST));
+          room[6-1].roomDrawables.add(new Door(room[9-1], DoorType.SOUTH));
+        
+          room[7-1].roomDrawables.add(new Door(room[4-1], DoorType.NORTH));
+          room[7-1].roomDrawables.add(new Door(room[8-1], DoorType.EAST));
+        
+          room[8-1].roomDrawables.add(new Door(room[5-1], DoorType.NORTH));
+          room[8-1].roomDrawables.add(new Door(room[7-1], DoorType.WEST));
+          room[8-1].roomDrawables.add(new Door(room[9-1], DoorType.EAST));
+        
+          room[9-1].roomDrawables.add(new Door(room[8-1], DoorType.WEST));
+          room[9-1].roomDrawables.add(new Door(room[6-1], DoorType.NORTH));
+        
+        
+
+       ////////////////////////////////////////////////////////////////////////////////        
+
+        currentRoom = room[2-1];
+        
         player = new Player(100, 100);
         drawables.add(player);
-        currentRoom.roomDrawables.add(new Door(0, (720/2)-100, newRoom));
+        
         // drawables.add(new LightMask()); <- REMOVED FOR NOW
         drawablesUpdated();
     }
     public void draw() {   
       currentRoom.draw();
+      
       for(Drawable t : drawables) {
         if(t instanceof Player) {
             //translate(t.x, t.y); <-- DOESN'T WORK
@@ -40,6 +91,9 @@ public class Game {
             currentRoom.tick();
             if(drawablesChanged) drawablesUpdated();
         }
+        for(int i = 0; i < room.length; i++) {
+            room[i].waterTick();
+        }
     }
     public void keyPressed() {
         player.keyPressed();
@@ -52,6 +106,9 @@ public class Game {
             key = 0;
             drawables.clear();
             playstate = PlayState.MENU;
+        } else if(key == 'f') {
+            actionPressed = true;
+            // previousReleased = millis();
         }
     }
 }

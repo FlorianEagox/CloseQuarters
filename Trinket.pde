@@ -9,7 +9,8 @@ public class Trinket extends Sprite {
   public boolean onCollision(Sprite other) {
     if (other instanceof Player) {
       Player player = (Player) other;
-      if (player.pickup(this.type)) {
+      if (player.pickup(this.type) && actionPressed) {
+        actionPressed = false;
         this.toBeRemoved = true;
         return true;
       }

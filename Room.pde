@@ -1,16 +1,13 @@
 public class Room {
   ArrayList<Drawable> roomDrawables;
   PImage objectLayer;
-  int waterRaidus = 0;
+  int waterRadius = 0;
+  int maxWater = 2750;
   WaterDirection direction = WaterDirection.WEST;
   boolean waterActive = true;
   PImage bkg;
-  public Room(String name /* Drawable[] myDrawables */) {
+  public Room(String name) {
     roomDrawables = new ArrayList<Drawable>();
-    // for (Drawable drawable : myDrawables) {
-    //   roomDrawables.add(drawable);
-    // }
-    
     int px = width/2;
     int py = height/2;
     if(name != "deck") {
@@ -23,7 +20,6 @@ public class Room {
       }
     }
     bkg = loadImage("assets/" + (name == "deck" ? "deck" : "floor") + ".png");
-    
   }
 
   public void drawablesUpdated() {
@@ -36,7 +32,7 @@ public class Room {
     image(bkg, 0, 0);
     if(waterActive) {
       fill(#40a4df);
-      ellipse(direction.x, direction.y, waterRaidus, waterRaidus);
+      ellipse(direction.x, direction.y, waterRadius, waterRadius);
     }
     
     for(Drawable d : roomDrawables)
@@ -50,9 +46,10 @@ public class Room {
         for(Drawable j : drawables) {
           if(j instanceof Sprite) {
             Sprite sprite2 = (Sprite) j;
-            if (intersects(sprite, sprite2)) {
+            if (intersects(sprite, sprite2) && actionPressed) {
               if (sprite.onCollision(sprite2)) {
                 drawablesChanged = true;
+                actionPressed = false;
               }
             }
           }
@@ -61,9 +58,12 @@ public class Room {
       }
     }
     if(drawablesChanged) roomDrawablesUpdated();
-  
-    if(waterActive)
-      waterRaidus += 1;
+  }
+
+  public void waterTick() {
+      if(waterActive)
+        waterRadius += 1;
+      //println(waterRadius);
   }
 
   public void roomDrawablesUpdated() {

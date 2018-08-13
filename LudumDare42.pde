@@ -1,11 +1,11 @@
 import java.util.*;
 Room currentRoom;
-Room newRoom;
 Player player;
 PlayState playstate;
 Menu menu;
 Game game;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+boolean actionPressed = false;
 
 void setup() {
   playstate = PlayState.MENU;
