@@ -4,6 +4,7 @@ Player player;
 PlayState playstate;
 Menu menu;
 Game game;
+float score = 0f;
 ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 boolean actionPressed = false;
 

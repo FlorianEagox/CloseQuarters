@@ -12,7 +12,7 @@ public class Game {
         }
         
           roomDeck.roomDrawables.add(new Door(room[2-1], DoorType.STAIRS));
-        
+          roomDeck.roomDrawables.add(new Trinket_Chest((width - 64) / 2, 200));
           room[1-1].roomDrawables.add(new Door(room[2-1], DoorType.EAST));
           room[1-1].roomDrawables.add(new Door(room[4-1], DoorType.SOUTH));
         
@@ -90,6 +90,7 @@ public class Game {
                 }
                 sprite.tick();
             }
+						println(player.currentTrinkets.size());
             currentRoom.tick();
             if(drawablesChanged) drawablesUpdated();
         }
