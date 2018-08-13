@@ -1,9 +1,10 @@
 abstract class Sprite extends Drawable {
   Drawable drawable;
+  Image img;
   public Sprite(int x, int y, String path) {
     this.x = x;
     this.y = y;
-    Image img = new Image("assets/" + path);
+    this.img = new Image("assets/" + path);
     this.sizeX = img.sizeX;
     this.sizeY = img.sizeY;
     this.drawable = img;

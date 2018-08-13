@@ -1,11 +1,20 @@
 class Player extends Sprite {
   int velX, velY, vel = 5, maxTrinkets = 5;
-
+  AnimationState animation = AnimationState.IDLE;
   private ArrayList<TrinketTypes> currentTrinkets = new ArrayList<TrinketTypes>();
-
+  float rotation = 0f;
+  private ArrayList<Image> animations = new ArrayList<Image>();
+  boolean walking;
+  int delay = 500;
+  int previousTime = 0;
+  int currentFrame = 0;
+  
   Player(int x, int y) {
     super(x, y, "player/idle.png", 75, 75);
     this.zIndex = 1;
+    for(int i = 1; i <= 5; i++) {
+      animations.add(new Image("assets/player/walk " + i + ".png"));
+    }
   }
 
   @Override
@@ -13,6 +22,29 @@ class Player extends Sprite {
     x += velX;
     y += velY;
 
+    switch(animation) {
+      case UP:
+        rotation = 0f;
+        break;
+      case DOWN:
+        rotation = 180f;
+        break;
+      case LEFT:
+        rotation = 270f;
+        break;
+      case RIGHT:
+        rotation = 90f;
+        break;
+    }
+    if(animation != AnimationState.IDLE) {
+      if(millis() - previousTime >= delay) {
+        if(currentFrame >= animations.size())
+          currentFrame = 0;
+        drawable = animations.get(currentFrame);
+        currentFrame++;
+        previousTime = millis();
+      }
+    }
     //Keep Player in range
     if(x <= 0)
       x = 0;
@@ -36,15 +68,19 @@ class Player extends Sprite {
     switch(key) {
       case 'w':
         velY = -vel;
+        animation = AnimationState.UP;
         break;
       case 's':
         velY = vel;
+        animation = AnimationState.DOWN;
         break;
       case 'a':
         velX = -vel;
+        animation = AnimationState.LEFT;
         break;
       case 'd':
         velX = vel;
+        animation = AnimationState.RIGHT;
         break;
     }
   }
@@ -59,5 +95,6 @@ class Player extends Sprite {
         velX = 0;
         break;
     }
+    animation = AnimationState.IDLE;
   }
 }

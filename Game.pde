@@ -11,8 +11,14 @@ public class Game {
     }
     public void draw() {   
       currentRoom.draw();
-      for(Drawable t : drawables)
+      for(Drawable t : drawables) {
+        if(t instanceof Player) {
+            //translate(t.x, t.y); <-- DOESN'T WORK
+            //rotate(radians(player.rotation));
+        }
         t.draw();
+        
+        }
     }
     public void tick() {
         boolean drawablesChanged = false;
@@ -48,5 +54,4 @@ public class Game {
             playstate = PlayState.MENU;
         }
     }
-    
 }
