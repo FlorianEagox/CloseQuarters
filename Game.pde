@@ -4,6 +4,7 @@ public class Game {
     LightMask lightMask = new LightMask();
     int previousReleased = 0, delay = 10000;
     public Game() {
+        drawables.clear();
         /////////////////////////////////////////////////////////////////////////////////
         // ALL THE FUCKING DOORS OH MY GOD I WANT TO DIE LET ME SLEEP PLEASE HOLY SHIT //
         /////////////////////////////////////////////////////////////////////////////////
@@ -76,8 +77,8 @@ public class Game {
 
     }
     public void tick() {
-        println(player.currentTrinkets.size());
-        boolean drawablesChanged = false;
+        
+      boolean drawablesChanged = false;
         for(Drawable t : drawables) {
             if (t instanceof Sprite) { 
                 Sprite sprite = (Sprite) t;

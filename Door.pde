@@ -25,6 +25,25 @@ class Door extends Sprite {
     public boolean onCollision(Sprite other) {
         if (other instanceof Player && actionPressed) {
             currentRoom = this.nextRoom;
+            switch(type) {
+              case NORTH:
+                player.x = width / 2;
+                player.y = height - player.sizeY;
+                break;
+              case SOUTH:
+                println("gone");
+                player.x = width / 2;
+                player.y = 0 + player.sizeY;
+                break;
+              case EAST:
+                player.x = player.sizeX;
+                player.y = height / 2;
+                break;
+              case WEST:
+                player.x = width - player.sizeX;
+                player.y = height / 2;
+                break;
+            }
             actionPressed = false;
         }
         
