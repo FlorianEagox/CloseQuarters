@@ -2,6 +2,7 @@ public class Game {
     Room[] room = new Room[9];
     Room roomDeck;
     LightMask lightMask = new LightMask();
+    TrinketBar trinketBar;
     int previousReleased = 0, delay = 10000;
     public Game() {
         drawables.clear();
@@ -59,6 +60,8 @@ public class Game {
         
         player = new Player(100, 100);
         drawables.add(player);
+        trinketBar = new TrinketBar();
+        //drawables.add(trinketBar);
         drawablesUpdated();
     }
     public void draw() {   
@@ -74,7 +77,7 @@ public class Game {
       if (currentRoom != roomDeck) {
           lightMask.draw();
       }
-
+        trinketBar.draw();
     }
     public void tick() {
         
